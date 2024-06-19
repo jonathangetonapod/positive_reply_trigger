@@ -8,10 +8,9 @@
 <body>
     <h1>Webhook Trigger</h1>
     <form action="/trigger-webhook" method="post">
-        <label for="webhook_url">Webhook URL:</label><br>
-        <input type="text" id="webhook_url" name="webhook_url" required><br><br>
-        <label for="data">Data:</label><br>
-        <textarea id="data" name="data" rows="4" cols="50" required></textarea><br><br>
+        <input type="hidden" id="webhook_url" name="webhook_url" value="https://your-webhook-url.com">
+        <label for="lead_id">Lead ID:</label><br>
+        <input type="text" id="lead_id" name="lead_id" required><br><br>
         <input type="submit" value="Trigger Webhook">
     </form>
 </body>

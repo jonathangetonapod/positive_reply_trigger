@@ -11,10 +11,15 @@ def home():
 @app.route('/trigger-webhook', methods=['POST'])
 def trigger_webhook():
     webhook_url = request.form.get('webhook_url')
-    data = request.form.get('data')
+    lead_id = request.form.get('lead_id')
 
-    response = requests.post(webhook_url, json={"data": data})
+    # Construct the data to send to the webhook
+    data = {"lead_id": lead_id}
 
+    # Send the POST request to the webhook URL
+    response = requests.post(webhook_url, json=data)
+
+    # Check the response from the webhook and return an appropriate message
     if response.status_code == 200:
         return jsonify({"status": "success", "message": "Webhook triggered successfully"}), 200
     else:
