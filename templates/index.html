@@ -49,17 +49,56 @@
         input[type="submit"]:hover {
             background-color: #218838;
         }
+        .success-message {
+            display: none;
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Webhook Trigger</h1>
-        <form action="/trigger-webhook" method="post">
-            <input type="hidden" id="webhook_url" name="webhook_url" value="https://your-webhook-url.com">
+        <form id="webhookForm">
             <label for="lead_id">Lead ID:</label>
             <input type="text" id="lead_id" name="lead_id" required>
             <input type="submit" value="Trigger Webhook">
         </form>
+        <div class="success-message" id="successMessage">Webhook triggered successfully!</div>
     </div>
+
+    <script>
+        document.getElementById('webhookForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            const leadId = document.getElementById('lead_id').value;
+
+            fetch('/trigger-webhook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ lead_id: leadId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                        window.location.reload(); // Refresh the page
+                    }, 2000); // Show success message for 2 seconds
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to trigger webhook.');
+            });
+        });
+    </script>
 </body>
 </html>
