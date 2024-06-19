@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Trigger</title>
+</head>
+<body>
+    <h1>Webhook Trigger</h1>
+    <form action="/trigger-webhook" method="post">
+        <label for="webhook_url">Webhook URL:</label><br>
+        <input type="text" id="webhook_url" name="webhook_url" required><br><br>
+        <label for="data">Data:</label><br>
+        <textarea id="data" name="data" rows="4" cols="50" required></textarea><br><br>
+        <input type="submit" value="Trigger Webhook">
+    </form>
+</body>
+</html>

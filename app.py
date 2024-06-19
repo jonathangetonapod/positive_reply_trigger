@@ -1,18 +1,18 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template, jsonify
 import requests
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Webhook Trigger App is Running"
+    return render_template('index.html')
 
 @app.route('/trigger-webhook', methods=['POST'])
 def trigger_webhook():
-    webhook_url = request.json.get('webhook_url')
-    data = request.json.get('data', {})
+    webhook_url = request.form.get('webhook_url')
+    data = request.form.get('data')
 
-    response = requests.post(webhook_url, json=data)
+    response = requests.post(webhook_url, json={"data": data})
 
     if response.status_code == 200:
         return jsonify({"status": "success", "message": "Webhook triggered successfully"}), 200
