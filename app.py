@@ -13,6 +13,7 @@ def home():
 @app.route('/trigger-webhook', methods=['POST'])
 def trigger_webhook():
     lead_id = request.form.get('lead_id')
+    print(f"Received lead_id: {lead_id}")
 
     # Construct the data to send to the webhook
     data = {"lead_id": lead_id}
