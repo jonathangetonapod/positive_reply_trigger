@@ -33,7 +33,7 @@
             margin-bottom: 8px;
             font-weight: bold;
         }
-        input[type="text"], input[type="submit"] {
+        input[type="text"], input[type="submit"], textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -63,10 +63,10 @@
         <form id="webhookForm">
             <label for="campaign_id">Campaign ID:</label>
             <input type="text" id="campaign_id" name="campaign_id" required>
-            <label for="message_id">Message ID:</label>
-            <input type="text" id="message_id" name="message_id" required>
-            <label for="stats_id">Stats ID:</label>
+            <label for="stats_id">Email Stats ID:</label>
             <input type="text" id="stats_id" name="stats_id" required>
+            <label for="email_body">Email Body:</label>
+            <textarea id="email_body" name="email_body" rows="4" required></textarea>
             <input type="submit" value="Trigger Webhook">
         </form>
         <div class="success-message" id="successMessage">Webhook triggered successfully!</div>
@@ -77,8 +77,8 @@
             event.preventDefault(); // Prevent form from submitting the traditional way
 
             const campaignId = document.getElementById('campaign_id').value;
-            const messageId = document.getElementById('message_id').value;
             const statsId = document.getElementById('stats_id').value;
+            const emailBody = document.getElementById('email_body').value;
 
             fetch('/trigger-webhook', {
                 method: 'POST',
@@ -87,8 +87,8 @@
                 },
                 body: JSON.stringify({
                     campaign_id: campaignId,
-                    message_id: messageId,
-                    stats_id: statsId
+                    stats_id: statsId,
+                    email_body: emailBody
                 })
             })
             .then(response => response.json())
