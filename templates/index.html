@@ -61,8 +61,6 @@
     <div class="container">
         <h1>Webhook Trigger</h1>
         <form id="webhookForm">
-            <label for="lead_id">Lead ID:</label>
-            <input type="text" id="lead_id" name="lead_id" required>
             <label for="campaign_id">Campaign ID:</label>
             <input type="text" id="campaign_id" name="campaign_id" required>
             <label for="message_id">Message ID:</label>
@@ -78,7 +76,6 @@
         document.getElementById('webhookForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent form from submitting the traditional way
 
-            const leadId = document.getElementById('lead_id').value;
             const campaignId = document.getElementById('campaign_id').value;
             const messageId = document.getElementById('message_id').value;
             const statsId = document.getElementById('stats_id').value;
@@ -89,7 +86,6 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    lead_id: leadId,
                     campaign_id: campaignId,
                     message_id: messageId,
                     stats_id: statsId
