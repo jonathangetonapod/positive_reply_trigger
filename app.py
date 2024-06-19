@@ -4,20 +4,21 @@ import os
 
 app = Flask(__name__)
 
+WEBHOOK_URL = "https://your-webhook-url.com"
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 @app.route('/trigger-webhook', methods=['POST'])
 def trigger_webhook():
-    webhook_url = request.form.get('webhook_url')
     lead_id = request.form.get('lead_id')
 
     # Construct the data to send to the webhook
     data = {"lead_id": lead_id}
 
     # Send the POST request to the webhook URL
-    response = requests.post(webhook_url, json=data)
+    response = requests.post(WEBHOOK_URL, json=data)
 
     # Check the response from the webhook and return an appropriate message
     if response.status_code == 200:
