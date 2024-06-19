@@ -14,10 +14,19 @@ def home():
 def trigger_webhook():
     data = request.get_json()
     lead_id = data.get('lead_id')
-    print(f"Received lead_id: {lead_id}")
+    campaign_id = data.get('campaign_id')
+    message_id = data.get('message_id')
+    stats_id = data.get('stats_id')
+
+    print(f"Received lead_id: {lead_id}, campaign_id: {campaign_id}, message_id: {message_id}, stats_id: {stats_id}")
 
     # Construct the data to send to the webhook
-    webhook_data = {"lead_id": lead_id}
+    webhook_data = {
+        "lead_id": lead_id,
+        "campaign_id": campaign_id,
+        "message_id": message_id,
+        "stats_id": stats_id
+    }
 
     # Send the POST request to the webhook URL
     try:
