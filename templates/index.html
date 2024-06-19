@@ -4,14 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webhook Trigger</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Webhook Trigger</h1>
-    <form action="/trigger-webhook" method="post">
-        <input type="hidden" id="webhook_url" name="webhook_url" value="https://your-webhook-url.com">
-        <label for="lead_id">Lead ID:</label><br>
-        <input type="text" id="lead_id" name="lead_id" required><br><br>
-        <input type="submit" value="Trigger Webhook">
-    </form>
+    <div class="container">
+        <h1>Webhook Trigger</h1>
+        <form action="/trigger-webhook" method="post">
+            <input type="hidden" id="webhook_url" name="webhook_url" value="https://your-webhook-url.com">
+            <label for="lead_id">Lead ID:</label>
+            <input type="text" id="lead_id" name="lead_id" required>
+            <input type="submit" value="Trigger Webhook">
+        </form>
+    </div>
 </body>
 </html>
