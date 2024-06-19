@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-WEBHOOK_URL = "https://getonapod.app.n8n.cloud/webhook-test/f07486db-a7db-4f96-91cc-765809309105"
+WEBHOOK_URL = "https://getonapod.app.n8n.cloud/webhook/f07486db-a7db-4f96-91cc-765809309105"
 
 @app.route('/')
 def home():
@@ -62,9 +62,7 @@ def trigger_webhook():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-Updated index.html
-Make sure the form data is being correctly collected and sent to the server.
-
+HTML Form (index.html)
 html
 Copy code
 <!DOCTYPE html>
