@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-WEBHOOK_URL = "https://getonapod.app.n8n.cloud/webhook-test/a06606f6-d5ba-47d1-a6e8-73c24f8d45f6"
+WEBHOOK_URL = "https://getonapod.app.n8n.cloud/webhook-test/f07486db-a7db-4f96-91cc-765809309105"
 
 @app.route('/')
 def home():
