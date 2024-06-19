@@ -18,13 +18,21 @@ def trigger_webhook():
     data = {"lead_id": lead_id}
 
     # Send the POST request to the webhook URL
-    response = requests.post(WEBHOOK_URL, json=data)
+    try:
+        response = requests.post(WEBHOOK_URL, json=data)
+        response.raise_for_status()  # Raise an error for bad HTTP status codes
+    except requests.exceptions.RequestException as e:
+        # Log the error and response
+        print(f"Error: {e}")
+        if response is not None:
+            print(f"Response Content: {response.content}")
+        return jsonify({"status": "error", "message": "Failed to trigger webhook", "details": str(e)}), 500
 
     # Check the response from the webhook and return an appropriate message
     if response.status_code == 200:
         return jsonify({"status": "success", "message": "Webhook triggered successfully"}), 200
     else:
-        return jsonify({"status": "error", "message": "Failed to trigger webhook"}), response.status_code
+        return jsonify({"status": "error", "message": "Failed to trigger webhook", "details": response.content.decode()}), response.status_code
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
